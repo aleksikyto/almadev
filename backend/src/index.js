@@ -1,9 +1,24 @@
 const express = require("express");
 const app = express();
+const morgan = require("morgan");
 const cors = require("cors");
 
 app.use(cors());
 app.use(express.json());
+
+morgan.token("resBody", function (req, res) {
+  if (res["statusCode"] === 200) {
+    const name = req.body.name;
+    const weight = req.body.weight;
+    return JSON.stringify({ name, weight });
+  }
+});
+
+app.use(
+  morgan(
+    ":method :url :status :res[content-length] - :response-time ms :resBody"
+  )
+);
 
 let favorites = [
   {

@@ -1,7 +1,6 @@
 import Favorite from "./Favorite";
 
 const Favorites = ({ favorites, deleteFavorite }) => {
-  console.log("favorites", favorites);
   return (
     <div>
       {favorites.length >= 0 &&

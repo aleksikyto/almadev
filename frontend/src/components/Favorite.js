@@ -1,11 +1,11 @@
-const Favorites = ({ favorite, deletefavorite }) => {
+const Favorite = ({ favorite, deleteFavorite }) => {
   return (
     <li>
       {favorite.name} {favorite.weight}g
       <button
         onClick={() => {
           if (window.confirm("Delete this favorite?")) {
-            deletefavorite(favorite.id);
+            deleteFavorite(favorite.id);
           }
         }}
       >
@@ -15,4 +15,4 @@ const Favorites = ({ favorite, deletefavorite }) => {
   );
 };
 
-export default Favorites;
+export default Favorite;

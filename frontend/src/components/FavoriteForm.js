@@ -14,10 +14,24 @@ const FavoriteForm = ({
   return (
     <form onSubmit={addFavorite}>
       <div>
-        name: <input value={newName} onChange={handleNameChange} />
+        <label>
+          name: <input value={newName} onChange={handleNameChange} />
+        </label>
       </div>
       <div>
-        weight: <input value={newWeight} onChange={handleWeightChange} />
+        <label>
+          weight: <input value={newWeight} onChange={handleWeightChange} />
+        </label>
+      </div>
+      <div>
+        <label>
+          price: <input value={newPrice} onChange={handlePriceChange} />
+        </label>
+      </div>
+      <div>
+        <label>
+          roast: <input value={newRoast} onChange={handleRoastChange} />
+        </label>
       </div>
       <div>
         <button type="submit">add</button>
