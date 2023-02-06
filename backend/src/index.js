@@ -43,16 +43,17 @@ app.post("/api/favorites", (req, res) => {
   if (body.name === undefined) {
     return response.status(400).json({ error: "name missing" });
   }
-  try {
-    Favorite.create({
-      name: body.name,
-      weight: body.weight,
-      price: body.price,
-      roast: body.roast,
-    });
-  } catch (error) {
-    console.log("mongodb create error", error.message);
-  }
+
+  const favorite = new Favorite({
+    name: body.name,
+    weight: body.weight,
+    price: body.price,
+    roast: body.roast || undefined,
+  });
+
+  favorite.save().then((savedFavorite) => {
+    res.json(savedFavorite);
+  });
 });
 
 const PORT = process.env.REACT_APP_PORT;

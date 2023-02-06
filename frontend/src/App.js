@@ -4,7 +4,7 @@ import Favorites from "./components/Favorites";
 import favoriteService from "./services/favorites";
 
 const App = () => {
-  const [favorites, setfavorites] = useState([]);
+  const [favorites, setFavorites] = useState([]);
   const [newName, setNewName] = useState("");
   const [newWeight, setNewWeight] = useState("");
   const [newPrice, setNewPrice] = useState("");
@@ -12,14 +12,14 @@ const App = () => {
 
   useEffect(() => {
     favoriteService.getAll().then((response) => {
-      setfavorites(response);
+      setFavorites(response);
     });
   }, []);
 
   const deleteFavorite = (id) => {
     favoriteService.deleteFavorite(id);
-    const updatedList = favorites.filter((favorite) => favorite._id !== id);
-    setfavorites(updatedList);
+    const updatedList = favorites.filter((favorite) => favorite.id !== id);
+    setFavorites(updatedList);
   };
 
   const addFavorite = (event) => {
@@ -32,11 +32,14 @@ const App = () => {
       roast: newRoast,
     };
 
+    console.log("favoriteobj", favoriteObject);
+
     if (!favorites.find((favorite) => favorite.name === newName)) {
+      console.log("in");
       favoriteService
         .create(favoriteObject)
         .then((returnedFavorite) => {
-          setfavorites(favorites.concat(returnedFavorite));
+          setFavorites(favorites.concat(returnedFavorite));
           setNewName("");
           setNewWeight("");
           setNewPrice("");
@@ -79,7 +82,13 @@ const App = () => {
         handleRoastChange={handleRoastChange}
       />
       <h2>Added favorites</h2>
-      <Favorites favorites={favorites} deleteFavorite={deleteFavorite} />
+      {favorites ? (
+        <Favorites favorites={favorites} deleteFavorite={deleteFavorite} />
+      ) : (
+        <div>
+          <p>No favorites added yet.</p>
+        </div>
+      )}
     </div>
   );
 };

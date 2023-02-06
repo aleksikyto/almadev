@@ -15,11 +15,14 @@ const getAll = () => {
 };
 
 const create = (newObject) => {
-  const request = axios.post(baseUrl, newObject);
-  return request.then((response) => {
-    console.log(response.data);
-    return response.data;
-  });
+  try {
+    const request = axios.post(baseUrl, newObject);
+    return request.then((response) => {
+      return response.data;
+    });
+  } catch (e) {
+    console.log("e", e.message);
+  }
 };
 
 const deleteFavorite = (id) => {
