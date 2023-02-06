@@ -1,7 +1,7 @@
 const Favorite = ({ favorite, deleteFavorite }) => {
   return (
     <li>
-      {favorite.name} {favorite.weight}g
+      {favorite.name} {favorite.weight}g {favorite.price}€
       <button
         onClick={() => {
           if (window.confirm("Delete this favorite?")) {

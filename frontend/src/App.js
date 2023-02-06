@@ -18,7 +18,7 @@ const App = () => {
 
   const deleteFavorite = (id) => {
     favoriteService.deleteFavorite(id);
-    const updatedList = favorites.filter((favorite) => favorite.id !== id);
+    const updatedList = favorites.filter((favorite) => favorite._id !== id);
     setfavorites(updatedList);
   };
 
@@ -46,9 +46,6 @@ const App = () => {
     }
 
     if (favorites.find((favorite) => favorite.name === newName)) {
-      const favoriteToEdit = favorites.find(
-        (favorite) => favorite.name === newName
-      );
       alert(`${newName} is already added to favorites.`);
     }
   };

@@ -22,13 +22,6 @@ const create = (newObject) => {
   });
 };
 
-const update = (id, newObject) => {
-  const request = axios.put(`${baseUrl}/${id}`, newObject);
-  return request.then((response) => {
-    return response.data;
-  });
-};
-
 const deleteFavorite = (id) => {
   const request = axios.delete(`${baseUrl}/${id}`);
   return request.then((response) => {
@@ -40,6 +33,5 @@ const deleteFavorite = (id) => {
 export default {
   getAll: getAll,
   create: create,
-  update: update,
   deleteFavorite: deleteFavorite,
 };
