@@ -1,27 +1,14 @@
 const mongoose = require("mongoose");
-require("dotenv").config();
-
-mongoose.set("strictQuery", false);
-
-const url = process.env.REACT_APP_MONGODB_URI;
-
-console.log("connecting to", url);
-mongoose
-  .connect(url)
-  .then((result) => {
-    console.log("connected to MongoDB");
-  })
-  .catch((error) => {
-    console.log("error connecting to MongoDB:", error.message);
-  });
+const config = require("../utils/config");
 
 const favoriteSchema = new mongoose.Schema({
-  name: String,
+  name: { type: String, minlength: 1, required: true },
   weight: Number,
   price: Number,
   roast: { type: Number, required: false },
 });
 
+// instead of object._id be able to use object.id
 favoriteSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();

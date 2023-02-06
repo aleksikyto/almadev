@@ -78,7 +78,9 @@ const App = () => {
         handleNameChange={handleNameChange}
         newWeight={newWeight}
         handleWeightChange={handleWeightChange}
+        newPrice={newPrice}
         handlePriceChange={handlePriceChange}
+        newRoast={newRoast}
         handleRoastChange={handleRoastChange}
       />
       <h2>Added favorites</h2>

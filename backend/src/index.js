@@ -1,12 +1,25 @@
+const config = require("./utils/config");
 const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
-const Favorite = require("./models/favorite");
-require("dotenv").config();
+const favoritesRouter = require("./controllers/favoritesControllers");
+const mongoose = require("mongoose");
+
+mongoose.set("strictQuery", false);
+
+mongoose
+  .connect(config.MONGODB_URI)
+  .then((result) => {
+    console.log("connected to MongoDB");
+  })
+  .catch((error) => {
+    console.log("error connecting to MongoDB:", error.message);
+  });
 
 app.use(cors());
 app.use(express.json());
+app.use("/api/favorites", favoritesRouter);
 
 // Morgan for debugging
 morgan.token("resBody", function (req, res) {
@@ -23,40 +36,7 @@ app.use(
   )
 );
 
-app.get("/api/favorites", (req, res) => {
-  Favorite.find({}).then((favorites) => {
-    res.status(200).json(favorites);
-  });
-});
-
-app.delete("/api/favorites/:id", (req, res, next) => {
-  Favorite.findByIdAndDelete(req.params.id)
-    .then((result) => {
-      res.status(204).end();
-    })
-    .catch((error) => next(error));
-});
-
-app.post("/api/favorites", (req, res) => {
-  const body = req.body;
-
-  if (body.name === undefined) {
-    return response.status(400).json({ error: "name missing" });
-  }
-
-  const favorite = new Favorite({
-    name: body.name,
-    weight: body.weight,
-    price: body.price,
-    roast: body.roast || undefined,
-  });
-
-  favorite.save().then((savedFavorite) => {
-    res.json(savedFavorite);
-  });
-});
-
-const PORT = process.env.REACT_APP_PORT;
+const PORT = config.PORT;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
