@@ -2,9 +2,15 @@ const favoritesRouter = require("express").Router();
 const Favorite = require("../models/favorite");
 
 favoritesRouter.get("/", (req, res) => {
-  Favorite.find({}).then((favorites) => {
-    res.status(200).json(favorites);
-  });
+  Favorite.find({})
+    .then((favorites) => {
+      if (favorites) {
+        res.status(200).json(favorites);
+      } else {
+        res.status(400).end();
+      }
+    })
+    .catch((error) => console.log(error.message));
 });
 
 favoritesRouter.delete("/:id", (req, res, next) => {
@@ -12,7 +18,7 @@ favoritesRouter.delete("/:id", (req, res, next) => {
     .then((result) => {
       res.status(204).end();
     })
-    .catch((error) => next(error));
+    .catch((error) => console.log(error.message));
 });
 
 favoritesRouter.post("/", (req, res) => {
@@ -29,9 +35,16 @@ favoritesRouter.post("/", (req, res) => {
     roast: body.roast || undefined,
   });
 
-  favorite.save().then((savedFavorite) => {
-    res.json(savedFavorite);
-  });
+  favorite
+    .save()
+    .then((savedFavorite) => {
+      if (savedFavorite) {
+        res.status(200).json(savedFavorite);
+      } else {
+        res.status(400).end();
+      }
+    })
+    .catch((error) => console.log(error.message));
 });
 
 module.exports = favoritesRouter;
