@@ -53,3 +53,13 @@ const baseUrl = "http://localhost:<YOUR PORT>api/favorites"
 ```
 npm start
 ```
+
+## Credits
+In this project I used things learned from
+```
+https://fullstackopen.com/
+```
+Also got tips for dropdown from
+```
+https://www.simplilearn.com/tutorials/reactjs-tutorial/how-to-create-functional-react-dropdown-menu
+```
