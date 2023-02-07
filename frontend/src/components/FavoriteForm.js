@@ -41,12 +41,14 @@ const FavoriteForm = ({
         €
       </div>
       <div>
-        <Dropdown
-          label={"roast: "}
-          options={dropdownOptions}
-          value={newRoast}
-          onChange={handleRoastChange}
-        />
+        {dropdownOptions && (
+          <Dropdown
+            label={"roast: "}
+            options={dropdownOptions}
+            value={newRoast}
+            onChange={handleRoastChange}
+          />
+        )}
       </div>
       <div>
         <button type="submit">add</button>
