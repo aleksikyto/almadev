@@ -24,8 +24,8 @@ favoritesRouter.post("/", (req, res) => {
 
   const favorite = new Favorite({
     name: body.name,
-    weight: body.weight,
-    price: body.price,
+    weight: body.weight || undefined,
+    price: body.price || undefined,
     roast: body.roast || undefined,
   });
 

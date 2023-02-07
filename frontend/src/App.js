@@ -32,8 +32,6 @@ const App = () => {
       roast: newRoast,
     };
 
-    console.log("favoriteobj", favoriteObject);
-
     if (!favorites.find((favorite) => favorite.name === newName)) {
       console.log("in");
       favoriteService
@@ -69,9 +67,19 @@ const App = () => {
     setNewRoast(event.target.value);
   };
 
+  // hard coded options for dropdown
+  const dropdownOptions = [
+    { label: "", value: "" },
+    { label: "1", value: "1" },
+    { label: "2", value: "2" },
+    { label: "3", value: "3" },
+    { label: "4", value: "4" },
+    { label: "5", value: "5" },
+  ];
+
   return (
     <div>
-      <h2>Coffee / Tea Favorites</h2>
+      <h2>Your Coffee / Tea Favorites List</h2>
       <FavoriteForm
         addFavorite={addFavorite}
         newName={newName}
@@ -82,9 +90,10 @@ const App = () => {
         handlePriceChange={handlePriceChange}
         newRoast={newRoast}
         handleRoastChange={handleRoastChange}
+        dropdownOptions={dropdownOptions}
       />
       <h2>Added favorites</h2>
-      {favorites ? (
+      {favorites.length > 0 ? (
         <Favorites favorites={favorites} deleteFavorite={deleteFavorite} />
       ) : (
         <div>

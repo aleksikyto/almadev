@@ -3,9 +3,9 @@ const config = require("../utils/config");
 
 const favoriteSchema = new mongoose.Schema({
   name: { type: String, minlength: 1, required: true },
-  weight: Number,
-  price: Number,
-  roast: { type: Number, required: false },
+  weight: { type: Number, required: false },
+  price: { type: Number, required: false },
+  roast: { type: String, required: false },
 });
 
 // instead of object._id be able to use object.id

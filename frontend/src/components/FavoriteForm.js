@@ -1,3 +1,5 @@
+import Dropdown from "./Dropdown";
+
 const FavoriteForm = ({
   addFavorite,
   newName,
@@ -8,6 +10,7 @@ const FavoriteForm = ({
   handlePriceChange,
   newRoast,
   handleRoastChange,
+  dropdownOptions,
 }) => {
   // modify, so roast isn't needed for tea & add all required sections
 
@@ -27,6 +30,7 @@ const FavoriteForm = ({
             value={newWeight}
             onChange={handleWeightChange}
           />
+          g
         </label>
       </div>
       <div>
@@ -34,12 +38,15 @@ const FavoriteForm = ({
           price:
           <input type="number" value={newPrice} onChange={handlePriceChange} />
         </label>
+        €
       </div>
       <div>
-        <label>
-          roast:
-          <input type="number" value={newRoast} onChange={handleRoastChange} />
-        </label>
+        <Dropdown
+          label={"roast: "}
+          options={dropdownOptions}
+          value={newRoast}
+          onChange={handleRoastChange}
+        />
       </div>
       <div>
         <button type="submit">add</button>
